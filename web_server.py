@@ -22,7 +22,7 @@ app = Flask(__name__)
 #For adding the count of said item to the manifest ID.
 @app.route('/challengecomplete',methods = ['POST', 'GET'])
 def pecanchallengeevent():
-    if request.args.get("key",None) != os.getenv("SECRET_KEY"):
+    if request.headers.get("X-API-Key",None) != os.getenv("SECRET_KEY"):
         abort(403)
 
     if request.method == 'POST':
@@ -69,7 +69,7 @@ def pecanchallengeevent():
 #For adding the count of said item to the manifest ID.
 @app.route('/getdiscord')
 def get_discord():
-    if request.args.get("key",None) != os.getenv("SECRET_KEY"):
+    if request.headers.get("X-API-Key",None) != os.getenv("SECRET_KEY"):
         abort(403)
     team_id =request.args.get('teamid',None)
     
@@ -97,7 +97,7 @@ def add_discord():
     team_id =request.args.get('teamid',None)
     code =request.args.get('code',None)
     state =request.args.get('state',None)
-    if request.args.get("key",None) != os.getenv("SECRET_KEY"):
+    if request.headers.get("X-API-Key",None) != os.getenv("SECRET_KEY"):
         abort(403)
     if team_id == None and (code == None or state == None):
         abort(412)
