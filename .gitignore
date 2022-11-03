@@ -1,0 +1,4 @@
+*.env
+*.pyd
+*.pyc
+database.db
